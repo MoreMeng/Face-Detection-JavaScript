@@ -1,0 +1,17 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+# if external access force https
+RewriteCond %{HTTP_HOST} ^ath7.link [NC]
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteCond %{REQUEST_URI} !(/$|\.)
+RewriteRule (.*) %{REQUEST_URI}/ [R=301,L]
+
+# RewriteRule ^go/([0-9-]+)/(.*)$ redirect.php?goid=$1&file=$2 [QSA]
+# RewriteRule ^([a-zA-Z-]+)(|/)$ index.php?dev=$1 [QSA]
+# RewriteRule ^([a-zA-Z-]+)/([0-9]+)(|/)$ index.php?dev=$1&id=$2 [QSA]
